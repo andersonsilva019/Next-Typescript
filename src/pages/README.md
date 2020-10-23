@@ -21,3 +21,8 @@ carregados, assim que a tela já estiver sido montada. Exemplo de SSR.
 }
 ```
 A função `getServerSideProps` não deve ser utilizada em todos os casos. Devemos realizar essa renderização pelo lado do servidor, quando queremos que apenas algumas informações estejam prontas para serem indexadas pelos motores de busca.
+
+## Variaveis ambientes
+
+Quando queremos que as variáveis ambientes estejam apenas no nosso ambiente de desenvolvimento, criamos o arquivo
+`.env.local` na raiz do nosso projeto. As variáveis que ficam nesse arquivo, somente podem serem acessadas detro das seguintes como `getStaticProps`, `getServerSideProps`, `getStaticPaths`
