@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router'
-import { Title } from '../../../styles/pages/Home'
+import { Title } from '~/styles/pages/Home'
 import dynamc from 'next/dynamic'
 import { useState } from 'react'
 
 const AddToCartModal = dynamc(
-  () => import('../../../components/AddToCartModal'),
+  () => import('~/components/AddToCartModal'),
   {loading: () => <p>Carregando...</p>}
  )
 

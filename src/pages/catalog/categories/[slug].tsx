@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { Title } from '../../../styles/pages/Home'
+import { Title } from '~/styles/pages/Home'
 import { GetStaticProps, GetStaticPaths } from 'next'
 
 interface IProduct {
