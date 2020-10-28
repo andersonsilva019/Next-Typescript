@@ -1,30 +1,22 @@
 import { Title } from "~/styles/pages/Home"
+import Link from 'next/link'
 import { GetServerSideProps } from "next"
 import SEO from "~/components/SEO"
-
-interface IProduct {
-  id: string;
-  title: string
-}
+import { client } from "~/lib/prismic"
+import Prismic from 'prismic-javascript'
+import PrismicDOM from 'prismic-dom';
+import { Document } from 'prismic-javascript/types/documents'
 
 interface IHomeProps {
-  recammendedProducts: IProduct[]
+  recammendedProducts: Document[]
 }
 
 export default function Home({ recammendedProducts }: IHomeProps) {
-
-  const handleSum = async () => {
-
-    const { sum } = (await import('../lib/math')).default
-
-    alert(sum(3,3))
-  }
-
   return (
     <div>
 
-      <SEO 
-        title="DevCommerce, o seu melhor e-commerce" 
+      <SEO
+        title="DevCommerce, o seu melhor e-commerce"
         shouldExcludeTitleSuffix
         image="cart.png"
       />
@@ -35,24 +27,27 @@ export default function Home({ recammendedProducts }: IHomeProps) {
           {recammendedProducts.map(recommendedProduct => {
             return (
               <li key={recommendedProduct.id}>
-                {recommendedProduct.title}
+                <Link href={`/catalog/products/${recommendedProduct.uid}`}>
+                  <a>
+                    {PrismicDOM.RichText.asText(recommendedProduct.data.title)}
+                  </a>
+                </Link>
               </li>
             )
           })}
         </ul>
-        <button onClick={handleSum} >Soma</button>
       </section>
     </div>
   )
 }
 
-export const getServerSideProps:GetServerSideProps<IHomeProps> = async () => {
-  const response = await fetch(`${process.env.API_URL}/recommended`)
-  const recammendedProducts = await response.json()
-
+export const getServerSideProps: GetServerSideProps<IHomeProps> = async () => {
+  const recammendedProducts = await client().query([
+    Prismic.Predicates.at('document.type', 'product')
+  ])
   return {
     props: {
-      recammendedProducts
+      recammendedProducts: recammendedProducts.results,
     }
   }
 }
