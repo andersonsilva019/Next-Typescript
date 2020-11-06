@@ -8,6 +8,10 @@ interface SEOProps {
   shouldIndexPage?: boolean; 
 }
 
+const isDevelopment = process.env.NODE_ENV !== 'production'
+
+const API_URL = isDevelopment ? process.env.NEXT_PUBLIC_API_URL_DEV : process.env.NEXT_PUBLIC_API_URL_PRO
+
 export default function SEO({ 
   title, 
   description, 
@@ -17,7 +21,7 @@ export default function SEO({
 }: SEOProps){
 
   const pageTitle = `${title} ${!shouldExcludeTitleSuffix ? '| DevCommerce' : ''}`
-  const pageImage = image ? `${process.env.NEXT_PUBLIC_SITE_URL}/${image}`: null
+  const pageImage = image ? `${API_URL}/${image}`: null
 
   return (
     <Head>
