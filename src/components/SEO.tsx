@@ -8,9 +8,8 @@ interface SEOProps {
   shouldIndexPage?: boolean; 
 }
 
-const isDevelopment = process.env.NODE_ENV !== 'production'
 
-const API_URL = isDevelopment ? process.env.NEXT_PUBLIC_API_URL_DEV : process.env.NEXT_PUBLIC_API_URL_PRO
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 console.log(API_URL)
 
