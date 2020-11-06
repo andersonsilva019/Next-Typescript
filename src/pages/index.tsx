@@ -18,7 +18,7 @@ export default function Home({ recammendedProducts }: IHomeProps) {
       <SEO
         title="DevCommerce, o seu melhor e-commerce"
         shouldExcludeTitleSuffix
-        image="/cart.png"
+        image="cart.png"
       />
       <section>
         <Title>Product</Title>
