@@ -12,6 +12,8 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 
 const API_URL = isDevelopment ? process.env.NEXT_PUBLIC_API_URL_DEV : process.env.NEXT_PUBLIC_API_URL_PRO
 
+console.log(API_URL)
+
 export default function SEO({ 
   title, 
   description, 
